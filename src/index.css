@@ -1,4 +1,9 @@
-/* src/index.css */
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -6,139 +11,146 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  /* Fondo oscuro con un degradado sutil estilo nebulosa */
-  background: radial-gradient(circle at top, #1a0b2e 0%, #09090e 100%);
+  background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #0f0c29);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
   color: #ffffff;
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* Efecto Glassmorphism (Cristal) */
 .calculadora-contenedor {
-  background: rgba(20, 20, 30, 0.4);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 40px;
-  border-radius: 20px;
+  background: rgba(20, 20, 35, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 45px;
+  border-radius: 24px;
   width: 100%;
-  max-width: 450px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  max-width: 480px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
-/* Título con degradado */
 .titulo {
   text-align: center;
-  margin-bottom: 30px;
-  font-size: 32px;
-  background: linear-gradient(90deg, #a77bf3, #f37bdf);
+  margin-bottom: 35px;
+  font-size: 34px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
 }
 
-/* Cajas de cada nota */
 .fila-nota {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
-  background: rgba(0, 0, 0, 0.2);
-  padding: 12px 15px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  margin-bottom: 18px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 14px 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease;
 }
 
 .fila-nota:hover {
-  transform: translateX(5px);
-  border-color: rgba(167, 123, 243, 0.3);
+  transform: translateX(8px);
+  border-color: rgba(142, 197, 252, 0.4);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .fila-nota label {
   font-weight: 600;
-  color: #a0a0b0;
-  width: 70px;
+  color: #d1d5db;
+  width: 75px;
+  font-size: 15px;
 }
 
-/* Inputs limpios */
 .input-estetico {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   color: #fff;
-  padding: 10px 12px;
-  border-radius: 8px;
-  width: 80px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  width: 85px;
   outline: none;
   font-size: 15px;
   transition: all 0.3s ease;
 }
 
 .input-estetico:focus {
-  border-color: #a77bf3;
-  background: rgba(167, 123, 243, 0.1);
-  box-shadow: 0 0 10px rgba(167, 123, 243, 0.2);
+  border-color: #8ec5fc;
+  background: rgba(142, 197, 252, 0.1);
+  box-shadow: 0 0 15px rgba(142, 197, 252, 0.25);
 }
 
-/* Botón llamativo con glow */
 .btn-calcular {
-  background: linear-gradient(135deg, #6366f1, #a855f7);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border: none;
-  padding: 15px;
-  border-radius: 12px;
+  padding: 16px;
+  border-radius: 14px;
   cursor: pointer;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 25px;
   font-weight: bold;
-  font-size: 16px;
-  letter-spacing: 0.5px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+  font-size: 17px;
+  letter-spacing: 1px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4);
 }
 
 .btn-calcular:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(168, 85, 247, 0.6);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(118, 75, 162, 0.6);
 }
 
-/* Animación y diseño de los resultados */
 .caja-resultado {
-  margin-top: 25px;
-  padding: 20px;
-  border-radius: 12px;
+  margin-top: 30px;
+  padding: 22px;
+  border-radius: 16px;
   text-align: center;
-  animation: fadeIn 0.5s ease;
+  animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .caja-error {
-  background: rgba(244, 63, 94, 0.1);
-  border: 1px solid rgba(244, 63, 94, 0.3);
-  color: #ff758f;
+  background: rgba(244, 63, 94, 0.15);
+  border: 1px solid rgba(244, 63, 94, 0.4);
+  color: #fda4af;
+  box-shadow: 0 0 20px rgba(244, 63, 94, 0.1);
 }
 
 .caja-parcial {
-  background: rgba(56, 189, 248, 0.1);
-  border: 1px solid rgba(56, 189, 248, 0.3);
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.1);
 }
 
 .caja-destacado {
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(16, 185, 129, 0.3);
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.2);
 }
 
 .caja-regular {
-  background: rgba(245, 158, 11, 0.1);
-  border: 1px solid rgba(245, 158, 11, 0.3);
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.15);
 }
 
 .caja-reprobado {
-  background: rgba(225, 29, 72, 0.1);
-  border: 1px solid rgba(225, 29, 72, 0.3);
-  box-shadow: 0 0 20px rgba(225, 29, 72, 0.15);
+  background: rgba(225, 29, 72, 0.15);
+  border: 1px solid rgba(225, 29, 72, 0.4);
+  box-shadow: 0 0 25px rgba(225, 29, 72, 0.2);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 18px 0;
 }

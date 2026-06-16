@@ -139,39 +139,37 @@ export default function CalculadoraPromedio() {
         </div>
       )}
 
-      {/* CAJA 1: Cálculo Parcial */}
       {!error && resultado && resultado.porcentajeFaltante > 0 && (
         <div className="caja-resultado caja-parcial">
-          <h3 style={{ margin: '0 0 10px 0', color: '#38bdf8' }}>Cálculo Parcial</h3>
+          <h3 style={{ margin: '0 0 10px 0', color: '#7dd3fc' }}>Cálculo Parcial</h3>
           <p style={{ margin: '5px 0' }}>Has ingresado el <strong>{resultado.sumaPorcentajes}%</strong> de tus notas.</p>
-          <p style={{ margin: '5px 0', color: '#fcd34d' }}>Puntos por rellenar: <strong>{resultado.porcentajeFaltante}%</strong></p>
-          <hr style={{ borderColor: 'rgba(56, 189, 248, 0.3)', margin: '15px 0' }} />
+          <p style={{ margin: '5px 0', color: '#fde047' }}>Puntos por rellenar: <strong>{resultado.porcentajeFaltante}%</strong></p>
+          <hr />
           
           {resultado.notaRequerida > 7.0 ? (
-            <p style={{ margin: 0, color: '#f43f5e', fontWeight: 'bold' }}>Ni sacándote un 7.0 te da para el 4.0. ☠️</p>
+            <p style={{ margin: 0, color: '#fca5a5', fontWeight: 'bold' }}>Ni sacándote un 7.0 te da para el 4.0. ☠️</p>
           ) : resultado.notaRequerida <= 1.0 ? (
-            <p style={{ margin: 0, color: '#10b981', fontWeight: 'bold' }}>¡Tranquilidad! Ya tienes el ramo aprobado. 🎉</p>
+            <p style={{ margin: 0, color: '#6ee7b7', fontWeight: 'bold' }}>¡Tranquilidad! Ya tienes el ramo aprobado. 🎉</p>
           ) : (
             <p style={{ margin: 0, fontWeight: 'bold' }}>
-              Necesitas promediar un <span style={{ color: '#fcd34d', fontSize: '1.2em' }}>{resultado.notaRequerida}</span> en el {resultado.porcentajeFaltante}% restante para aprobar.
+              Necesitas promediar un <span style={{ color: '#fde047', fontSize: '1.2em' }}>{resultado.notaRequerida}</span> en el {resultado.porcentajeFaltante}% restante para aprobar.
             </p>
           )}
         </div>
       )}
 
-      {/* CAJA 2: Resultado Final */}
       {!error && resultado && resultado.porcentajeFaltante === 0 && (
         <div className={obtenerClaseResultado()}>
           <h3 style={{ margin: '0 0 10px 0', color: '#fff' }}>Promedio Final: {resultado.promedioParcial}</h3>
           
           {resultado.nivelAprobacion === 'destacado' && (
-            <p style={{ margin: 0, color: '#34d399', fontWeight: 'bold' }}>¡Aprobado! Excelente rendimiento. 🏆</p>
+            <p style={{ margin: 0, color: '#6ee7b7', fontWeight: 'bold' }}>¡Aprobado! Excelente rendimiento. 🏆</p>
           )}
           {resultado.nivelAprobacion === 'regular' && (
-            <p style={{ margin: 0, color: '#fbbf24', fontWeight: 'bold' }}>¡Aprobado! Pasaste el ramo. 👍</p>
+            <p style={{ margin: 0, color: '#fde047', fontWeight: 'bold' }}>¡Aprobado! Pasaste el ramo. 👍</p>
           )}
           {resultado.nivelAprobacion === 'reprobado' && (
-            <p style={{ margin: 0, color: '#fb7185', fontWeight: 'bold' }}>Reprobado. A intentarlo de nuevo a la próxima. 💪</p>
+            <p style={{ margin: 0, color: '#fda4af', fontWeight: 'bold' }}>Reprobado. A intentarlo de nuevo a la próxima. 💪</p>
           )}
         </div>
       )}
