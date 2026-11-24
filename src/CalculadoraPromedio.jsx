@@ -1,4 +1,10 @@
+/**
+ * La ponderación se calcula sobre el 100 % del curso. Una fila completamente vacía no
+ * participa, pero una fila incompleta se rechaza. La estimación del porcentaje pendiente usa
+ * la regla explícita del ejercicio y redondea el mínimo requerido hacia arriba.
+ */
 import { useState } from 'react';
+import { requiredGrade } from './gradeMath';
 
 export default function CalculadoraPromedio() {
   const [evaluaciones, setEvaluaciones] = useState([
@@ -47,11 +53,11 @@ export default function CalculadoraPromedio() {
       const notaNum = parseFloat(ev.nota);
       const porcNum = parseFloat(ev.porcentaje);
 
-      if (notaNum < 1.0 || notaNum > 7.0) {
+      if (!Number.isFinite(notaNum) || notaNum < 1.0 || notaNum > 7.0) {
         notasInvalidas = true;
       }
 
-      if (porcNum <= 0 || porcNum > 100) {
+      if (!Number.isFinite(porcNum) || porcNum <= 0 || porcNum > 100) {
         porcentajesInvalidos = true;
       }
 
@@ -85,7 +91,7 @@ export default function CalculadoraPromedio() {
     let nivelAprobacion = '';
 
     if (porcentajeFaltante > 0) {
-      notaRequerida = (3.95 - sumaNotas) / (porcentajeFaltante / 100);
+      notaRequerida = requiredGrade(sumaNotas, porcentajeFaltante);
     } else {
       if (promedioRedondeado < 4.0) {
         nivelAprobacion = 'reprobado';
@@ -113,17 +119,18 @@ export default function CalculadoraPromedio() {
 
   return (
     <div className="calculadora-contenedor">
-      <h2 className="titulo">Calculadora de Notas</h2>
+      <h1 className="titulo">Calculadora de notas</h1>
+      <p>Escala 1,0 a 7,0. Este ejercicio supone aprobación desde 3,95 antes de redondear; verifica la regla de tu asignatura.</p>
       
       {evaluaciones.map((ev, index) => (
         <div key={ev.id} className="fila-nota">
-          <label>Nota {index + 1}:</label>
+          <label htmlFor={`nota-${ev.id}`}>Nota {index + 1}:</label>
           <input
-            type="number" step="0.1" placeholder="Ej: 5.5" className="input-estetico" value={ev.nota}
+            id={`nota-${ev.id}`} type="number" min="1" max="7" step="0.1" placeholder="Ej: 5.5" className="input-estetico" value={ev.nota}
             onChange={(e) => manejarCambio(ev.id, 'nota', e.target.value)}
           />
           <input
-            type="number" placeholder="% Ej: 30" className="input-estetico" value={ev.porcentaje}
+            aria-label={`Porcentaje de la nota ${index + 1}`} type="number" min="0.1" max="100" step="0.1" placeholder="% Ej: 30" className="input-estetico" value={ev.porcentaje}
             onChange={(e) => manejarCambio(ev.id, 'porcentaje', e.target.value)}
           />
         </div>
@@ -147,9 +154,9 @@ export default function CalculadoraPromedio() {
           <hr />
           
           {resultado.notaRequerida > 7.0 ? (
-            <p style={{ margin: 0, color: '#fca5a5', fontWeight: 'bold' }}>Ni sacándote un 7.0 te da para el 4.0. ☠️</p>
+            <p style={{ margin: 0, color: '#fca5a5', fontWeight: 'bold' }}>Con la ponderación ingresada, una nota 7,0 no alcanza el umbral de aprobación.</p>
           ) : resultado.notaRequerida <= 1.0 ? (
-            <p style={{ margin: 0, color: '#6ee7b7', fontWeight: 'bold' }}>¡Tranquilidad! Ya tienes el ramo aprobado. 🎉</p>
+            <p style={{ margin: 0, color: '#6ee7b7', fontWeight: 'bold' }}>Con estos valores, una nota 1,0 en el porcentaje restante alcanza el umbral del ejercicio.</p>
           ) : (
             <p style={{ margin: 0, fontWeight: 'bold' }}>
               Necesitas promediar un <span style={{ color: '#fde047', fontSize: '1.2em' }}>{resultado.notaRequerida}</span> en el {resultado.porcentajeFaltante}% restante para aprobar.
